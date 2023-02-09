@@ -26,3 +26,34 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// cookie message:
+
+const cookieMes = document.createElement('div');
+cookieMes.innerHTML =
+  'We use cookies for analytics and better functionality. <button class="btn btn--close-cookie">Accept</button>';
+cookieMes.classList.add('cookie-message');
+cookieMes.style.backgroundColor = '#37383d';
+
+document.querySelector('.header').after(cookieMes);
+
+// delete cookie message by clicking on button
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', function () {
+    cookieMes.remove();
+  });
+
+console.log(getComputedStyle(cookieMes).height);
+cookieMes.style.height =
+  Number.parseFloat(getComputedStyle(cookieMes).height) + 30 + 'px';
+
+// console.dir(modal);
+// console.log(modal.getAttribute('title'));
+// modal.setAttribute('title', 'This title is brand new');
+// console.log(modal.getAttribute('title'));
+
+// const logo = document.querySelector('.nav__logo');
+// console.log(logo.alt);
+// console.log(logo.src);
+// console.log(logo.getAttribute('src'));
