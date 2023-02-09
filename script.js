@@ -44,7 +44,6 @@ document
     cookieMes.remove();
   });
 
-console.log(getComputedStyle(cookieMes).height);
 cookieMes.style.height =
   Number.parseFloat(getComputedStyle(cookieMes).height) + 30 + 'px';
 
@@ -57,3 +56,24 @@ cookieMes.style.height =
 // console.log(logo.alt);
 // console.log(logo.src);
 // console.log(logo.getAttribute('src'));
+
+// smooth scrolling:
+
+const btnScroll = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScroll.addEventListener('click', function (event) {
+  let s1coords = section1.getBoundingClientRect();
+
+  // an old way: window.scroll(), window.scrollTo();
+  //   window.scrollTo({
+  //     left: s1coords.left + window.pageXOffset,
+  //     top: s1coords.top + window.pageYOffset,
+  //     behavior: 'smooth',
+  //   });
+
+  // more modern way: Element.scrollIntoView();
+  section1.scrollIntoView({
+    behavior: 'smooth',
+  });
+});
