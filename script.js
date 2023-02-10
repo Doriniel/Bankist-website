@@ -77,3 +77,39 @@ btnScroll.addEventListener('click', function (event) {
     behavior: 'smooth',
   });
 });
+
+// Practise at event bubbling and capturing to understand differences between event.target | this ( event.currentTarget)
+// example: changing backgroundColor of Nav menu elements by clicking on them:
+
+// const navEl = document.querySelector('.nav__link');
+// const navLinks = document.querySelector('.nav__links');
+// const navBar = document.querySelector('.nav');
+
+// const randomInt = function (min, max) {
+//   return Math.trunc(Math.random() * max - min + 1);
+// };
+
+// const randomColor = function () {
+//   return `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// };
+
+// navBar.addEventListener('click', function (e) {
+//   e.preventDefault();
+//   this.style.backgroundColor = randomColor();
+//   console.log('this', this);
+//   console.log('e.target', e.target);
+// });
+
+// navLinks.addEventListener('click', function (e) {
+//   e.preventDefault();
+//   this.style.backgroundColor = randomColor();
+//   console.log('this', this);
+//   console.log('e.target', e.target);
+// });
+
+// navEl.addEventListener('click', function (e) {
+//   e.preventDefault();
+//   this.style.backgroundColor = randomColor();
+//   console.log('this', this);
+//   console.log('e.target', e.target);
+// });
