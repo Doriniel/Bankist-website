@@ -1,11 +1,18 @@
 'use strict';
 
-// modal window:
+// selecting elements:
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScroll = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+// const navEl = document.querySelector('.nav__link');
+const navLinks = document.querySelector('.nav__links');
+const navBar = document.querySelector('.nav');
+
+// modal window:
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -47,20 +54,7 @@ document
 cookieMes.style.height =
   Number.parseFloat(getComputedStyle(cookieMes).height) + 30 + 'px';
 
-// console.dir(modal);
-// console.log(modal.getAttribute('title'));
-// modal.setAttribute('title', 'This title is brand new');
-// console.log(modal.getAttribute('title'));
-
-// const logo = document.querySelector('.nav__logo');
-// console.log(logo.alt);
-// console.log(logo.src);
-// console.log(logo.getAttribute('src'));
-
 // smooth scrolling:
-
-const btnScroll = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
 
 btnScroll.addEventListener('click', function (event) {
   let s1coords = section1.getBoundingClientRect();
@@ -78,12 +72,27 @@ btnScroll.addEventListener('click', function (event) {
   });
 });
 
+// Adding page navigation using event delegation:
+
+navBar.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  if (
+    event.target.classList.contains('nav__link') &&
+    !event.target.classList.contains('nav__link--btn')
+  ) {
+    const id = event.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
+});
+
+///// ---------------- //////// -----------------////////
+
 // Practise at event bubbling and capturing to understand differences between event.target | this ( event.currentTarget)
 // example: changing backgroundColor of Nav menu elements by clicking on them:
-
-// const navEl = document.querySelector('.nav__link');
-// const navLinks = document.querySelector('.nav__links');
-// const navBar = document.querySelector('.nav');
 
 // const randomInt = function (min, max) {
 //   return Math.trunc(Math.random() * max - min + 1);
