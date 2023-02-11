@@ -89,6 +89,40 @@ navBar.addEventListener('click', function (event) {
   }
 });
 
+// Tabbed component:
+
+const opTabs = document.querySelectorAll('.operations__tab');
+// console.log(opTabs);
+const opTabContainer = document.querySelector('.operations__tab-container');
+// console.dir(opTabContainer);
+const opContent = document.querySelectorAll('.operations__content');
+// console.log(opContent);
+
+// Clicking buttons - animation, clicking buttons - changing appearance of div content (adding and removing classes)
+//  - не назначая обработчик на каждую кнопку - так не оч чистый код, лучше - делегированием этого события на родительский элемент.
+// event delegation вместо назначения одинаковых функций каждой кнопке.
+
+opTabContainer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const clicked = e.target.closest('.operations__tab');
+  if (!clicked) return; // checking if clicked is null;
+
+  // changing classes at buttons to active (firstly remove active from all);
+  opTabs.forEach(t => t.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  //activate content area - matching button(clicked) data attribute and class of content area:
+
+  opContent.forEach(c => {
+    c.classList.remove('operations__content--active');
+  });
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
 ///// ---------------- //////// -----------------////////
 
 // Practise at event bubbling and capturing to understand differences between event.target | this ( event.currentTarget)
