@@ -8,7 +8,8 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScroll = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
-// const navEl = document.querySelector('.nav__link');
+// // // //
+const navEl = document.querySelectorAll('.nav__link');
 const navLinks = document.querySelector('.nav__links');
 const navBar = document.querySelector('.nav');
 
@@ -122,6 +123,29 @@ opTabContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+// Menu fade animation:
+
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    // traversing DOM-tree to choose all of the sibling elements of "link":
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link'); // nodeList
+    const logo = link.closest('.nav').querySelector('.nav__logo');
+
+    // change opacity of all links exept for the targeted one:
+    siblings.forEach(el => {
+      if (el !== link) {
+        el.style.opacity = this;
+      }
+      logo.style.opacity = this;
+    });
+  }
+};
+
+// binding argument (opacity value) as a context to a handler function:
+navBar.addEventListener('mouseover', handleHover.bind(0.5));
+navBar.addEventListener('mouseout', handleHover.bind(1));
 
 ///// ---------------- //////// -----------------////////
 
