@@ -147,6 +147,19 @@ const handleHover = function (e) {
 navBar.addEventListener('mouseover', handleHover.bind(0.5));
 navBar.addEventListener('mouseout', handleHover.bind(1));
 
+// Making navBar sticky on scroll:
+
+window.addEventListener('scroll', stickyNavFunc);
+
+function stickyNavFunc() {
+  let coords = section1.getBoundingClientRect();
+  if (window.scrollY > coords.top + window.scrollY) {
+    navBar.classList.add('sticky');
+  } else {
+    navBar.classList.remove('sticky');
+  }
+}
+
 ///// ---------------- //////// -----------------////////
 
 // Practise at event bubbling and capturing to understand differences between event.target | this ( event.currentTarget)
