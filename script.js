@@ -184,6 +184,33 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
 });
 
+// Lazy load images using IntersectionObserver API:
+
+const imagesLazy = document.querySelectorAll('img[data-src]');
+
+const loadingImg = function (entries, observer) {
+  const entry = entries[0];
+  if (!entry.isIntersecting) return;
+
+  // changing source of the image and deleting class that is bluring the lazy image:
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  //unobserve an element after the function is called:
+  observer.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loadingImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imagesLazy.forEach(img => imgObserver.observe(img));
+
 ///// ---------------- //////// -----------------////////
 
 // Practise at event bubbling and capturing to understand differences between event.target | this ( event.currentTarget)
