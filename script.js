@@ -160,6 +160,30 @@ function stickyNavFunc() {
   }
 }
 
+// Revealing sections on scroll with IntersectionObserver API
+
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const entry = entries[0];
+
+  if (!entry.isIntersecting) return; //if doesn't intersecting - do nothing
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target); // after revealing section - unobserve;
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  // callBack funcion and options object;
+  root: null, // null = viewport
+  threshold: 0.15, //threshold value at which to observe the intersection between target el and viewport
+});
+
+allSections.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
 ///// ---------------- //////// -----------------////////
 
 // Practise at event bubbling and capturing to understand differences between event.target | this ( event.currentTarget)
